@@ -52,8 +52,9 @@ export default function ApplyPage() {
     <main className="min-h-screen bg-[#FFFBF5]">
 
       <nav className="flex justify-between items-center px-6 md:px-12 py-5 bg-[#FFFBF5]/90 backdrop-blur-sm sticky top-0 z-50 border-b border-pink-100">
-        <a href="/" className="text-2xl font-bold text-pink-500">
-          토닥터
+                <a href="/" className="flex items-center gap-2">
+          <img src="/logo-icon.png" alt="토닥터 로고" className="h-10 w-10" />
+          <span className="text-2xl font-bold text-pink-500">토닥터</span>
         </a>
         <a
           href="/"

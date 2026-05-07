@@ -44,7 +44,7 @@ export default function WelcomePage() {
       content: {
         title: "토닥터 - 가족과의 1주일",
         description: getMessage(),
-        imageUrl: "https://todocter.vercel.app/og-image.png", // 미리보기 이미지 (없어도 OK)
+                imageUrl: "https://todocter.vercel.app/logo.png", // 카카오 공유 시 보이는 풀 로고 이미지 // 미리보기 이미지 (없어도 OK)
         link: {
           mobileWebUrl: OPEN_CHAT_URL,
           webUrl: OPEN_CHAT_URL,
@@ -67,8 +67,9 @@ export default function WelcomePage() {
 
       {/* ─── 상단 네비게이션 ─── */}
       <nav className="flex justify-between items-center px-6 md:px-12 py-5 bg-[#FFFBF5]/90 backdrop-blur-sm border-b border-pink-100">
-        <a href="/" className="text-2xl font-bold text-pink-500">
-          토닥터
+                <a href="/" className="flex items-center gap-2">
+          <img src="/logo-icon.png" alt="토닥터 로고" className="h-10 w-10" />
+          <span className="text-2xl font-bold text-pink-500">토닥터</span>
         </a>
       </nav>
 

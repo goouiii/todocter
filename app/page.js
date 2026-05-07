@@ -8,10 +8,11 @@ export default function Home() {
 
       {/* ─── 상단 네비게이션 바 ─── */}
       <nav className="flex justify-between items-center px-6 md:px-12 py-5 bg-[#FFFBF5]/90 backdrop-blur-sm sticky top-0 z-50 border-b border-pink-100">
-        {/* 로고 */}
-        <span className="text-2xl font-bold text-pink-500">
-          토닥터
-        </span>
+                {/* 로고 (아이콘 + 텍스트) */}
+        <a href="/" className="flex items-center gap-2">
+          <img src="/logo-icon.png" alt="토닥터 로고" className="h-10 w-10" />
+          <span className="text-2xl font-bold text-pink-500">토닥터</span>
+        </a>
 
         {/* 신청하기 버튼 (상단 CTA) */}
         <a
