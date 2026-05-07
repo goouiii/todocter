@@ -1,11 +1,13 @@
-// "use client"는 사용자 입력(폼)을 다루는 페이지에 꼭 필요합니다.
-// 버튼 클릭, 입력값 읽기 등 사용자 동작을 처리하려면 반드시 써야 해요.
 "use client";
 
-// useState: 사용자가 폼에 입력한 값을 저장하는 도구입니다.
 import { useState } from "react";
+// 페이지 이동을 위한 도구
+import { useRouter } from "next/navigation";
 
 export default function ApplyPage() {
+  // 페이지 이동을 위한 router 도구 가져오기
+  const router = useRouter();
+
   // ─── 폼 입력값을 저장하는 상태(state) ───
   const [formData, setFormData] = useState({
     role: "",       // 부모 / 자녀 구분
@@ -25,12 +27,17 @@ export default function ApplyPage() {
   };
 
   // ─── 제출 버튼을 눌렀을 때 ───
-  // 지금은 DB 저장 없이 콘솔 출력 + 알림만 띄웁니다.
+  // 지금은 DB 저장 없이 다음 페이지(/welcome)로 이동만 합니다.
   // 6단계에서 Supabase 저장으로 교체할 예정이에요.
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log("제출된 데이터:", formData);
-    alert("신청이 완료되었습니다! (현재는 저장되지 않습니다)");
+
+    // 다음 페이지에서 사용하기 위해 역할(부모/자녀)을 임시 저장
+    sessionStorage.setItem("role", formData.role);
+
+    // 참여 안내 페이지로 이동
+    router.push("/welcome");
   };
 
   return (
