@@ -193,7 +193,7 @@ export default function ApplyPage() {
               name="nickname"
               value={formData.nickname}
               onChange={handleChange}
-              placeholder="예: 지영"
+                            placeholder="예: 복덩이"
               required
               maxLength={20}
               className="w-full bg-white border border-gray-200 rounded-2xl px-5 py-4 text-base focus:outline-none focus:ring-2 focus:ring-pink-300"
