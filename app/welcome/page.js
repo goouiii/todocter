@@ -2,17 +2,22 @@
 
 import { useState, useEffect } from "react";
 
-// 카카오톡 오픈채팅방 링크
 const OPEN_CHAT_URL = "https://open.kakao.com/o/gwu7ZKti";
 
 export default function WelcomePage() {
   // 신청자 역할 (부모/자녀)
   const [role, setRole] = useState("");
+  // 신청자 닉네임 (가족 별명 매뉴얼에 사용)
+  const [nickname, setNickname] = useState("");
+  // 함께 참여하는 가족 구성원 (예: ["엄마", "아빠"])
+  const [familyMembers, setFamilyMembers] = useState([]);
 
-  // 페이지 진입 시 sessionStorage에서 역할 정보 읽기
+  // 페이지 진입 시 sessionStorage에서 정보 읽기
   useEffect(() => {
-    const savedRole = sessionStorage.getItem("role");
-    setRole(savedRole || "자녀");
+    setRole(sessionStorage.getItem("role") || "자녀");
+    setNickname(sessionStorage.getItem("nickname") || "본인");
+    const members = sessionStorage.getItem("familyMembers") || "";
+    setFamilyMembers(members ? members.split(",") : []);
   }, []);
 
   // ─── 부모/자녀에 따라 다른 메시지 ───
@@ -30,21 +35,19 @@ export default function WelcomePage() {
     }
   };
 
-  // ─── 카카오톡 공유 함수 ───
+  // ─── 카카오톡 공유 ───
   const handleKakaoShare = () => {
-    // 카카오 SDK가 로드되지 않았으면 안내 후 종료
     if (typeof window === "undefined" || !window.Kakao) {
       alert("카카오톡 공유 기능을 불러오는 중이에요. 잠시 후 다시 시도해주세요.");
       return;
     }
 
-    // 카카오톡 공유 다이얼로그 열기
     window.Kakao.Share.sendDefault({
-      objectType: "feed", // 피드 형태로 공유
+      objectType: "feed",
       content: {
         title: "토닥터 - 가족과의 1주일",
         description: getMessage(),
-                imageUrl: "https://todocter.vercel.app/logo.png", // 카카오 공유 시 보이는 풀 로고 이미지 // 미리보기 이미지 (없어도 OK)
+        imageUrl: "https://todocter.vercel.app/logo.png",
         link: {
           mobileWebUrl: OPEN_CHAT_URL,
           webUrl: OPEN_CHAT_URL,
@@ -67,7 +70,7 @@ export default function WelcomePage() {
 
       {/* ─── 상단 네비게이션 ─── */}
       <nav className="flex justify-between items-center px-6 md:px-12 py-5 bg-[#FFFBF5]/90 backdrop-blur-sm border-b border-pink-100">
-                <a href="/" className="flex items-center gap-2">
+        <a href="/" className="flex items-center gap-2">
           <img src="/logo-icon.png" alt="토닥터 로고" className="h-10 w-10" />
           <span className="text-2xl font-bold text-pink-500">토닥터</span>
         </a>
@@ -110,11 +113,57 @@ export default function WelcomePage() {
           </a>
         </div>
 
-        {/* ─── STEP 2: 가족에게 공유 ─── */}
+        {/* ─── STEP 2: 닉네임 설정 매뉴얼 (NEW) ─── */}
         <div className="bg-white rounded-3xl p-7 border border-pink-100 mb-5">
           <div className="flex items-center gap-3 mb-4">
             <span className="bg-pink-500 text-white w-8 h-8 rounded-full flex items-center justify-center font-bold text-sm">
               2
+            </span>
+            <h2 className="text-lg font-bold text-gray-800">
+              가족 닉네임 설정 안내
+            </h2>
+          </div>
+          <p className="text-gray-500 text-sm mb-5 leading-relaxed">
+            오픈채팅 입장 시, 가족 모두가 <strong className="text-pink-500">닉네임 + 관계</strong> 형태로 설정해주세요.
+            서로의 답변이 헷갈리지 않도록 도와줘요.
+          </p>
+
+          {/* 본인 닉네임 표시 */}
+          <div className="bg-pink-50 rounded-2xl p-5 mb-4">
+            <p className="text-xs text-pink-500 font-semibold mb-1">내 닉네임</p>
+            <p className="text-2xl font-bold text-gray-800">{nickname}</p>
+          </div>
+
+          {/* 가족 구성원별 닉네임 예시 */}
+          {familyMembers.length > 0 && (
+            <div className="bg-[#FFFBF5] rounded-2xl p-5 mb-4 border border-pink-100">
+              <p className="text-xs text-pink-500 font-semibold mb-3">함께하는 가족이 입장할 때</p>
+              <ul className="space-y-2">
+                {familyMembers.map((member) => (
+                  <li key={member} className="flex items-center gap-2 text-sm">
+                    <span className="text-pink-500">▸</span>
+                    <span className="text-gray-500">{member}는</span>
+                    <span className="bg-white border border-pink-200 rounded-lg px-3 py-1 font-semibold text-pink-600">
+                      {nickname} {member}
+                    </span>
+                    <span className="text-gray-500">로</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+
+          {/* 안내 문구 */}
+          <p className="text-xs text-gray-400 leading-relaxed">
+            💡 카카오톡 오픈채팅방 입장 시 닉네임 변경 화면이 나와요. 위 형식대로 입력하면 끝!
+          </p>
+        </div>
+
+        {/* ─── STEP 3: 가족에게 공유 ─── */}
+        <div className="bg-white rounded-3xl p-7 border border-pink-100 mb-5">
+          <div className="flex items-center gap-3 mb-4">
+            <span className="bg-pink-500 text-white w-8 h-8 rounded-full flex items-center justify-center font-bold text-sm">
+              3
             </span>
             <h2 className="text-lg font-bold text-gray-800">
               {role === "부모" ? "자녀에게" : "부모님께"} 카카오톡으로 보내기
@@ -132,7 +181,6 @@ export default function WelcomePage() {
             </p>
           </div>
 
-          {/* 카카오 공유 버튼 */}
           <button
             onClick={handleKakaoShare}
             className="w-full bg-yellow-400 text-gray-900 py-4 rounded-2xl font-bold text-base hover:bg-yellow-500 transition flex items-center justify-center gap-2"
@@ -144,7 +192,7 @@ export default function WelcomePage() {
         {/* ─── 안내 박스 ─── */}
         <div className="bg-pink-50 border border-pink-200 rounded-3xl p-6 text-center">
           <p className="text-pink-700 text-sm leading-relaxed">
-            ✨ 두 분 모두 입장하시면<br />
+            ✨ 모두 입장하시면<br />
             매일 정해진 시간에 질문이 도착해요.<br />
             <strong>1주일 완주 시 키링이 발송됩니다!</strong>
           </p>
