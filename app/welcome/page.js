@@ -47,7 +47,7 @@ export default function WelcomePage() {
       content: {
         title: "토닥터 - 가족과의 1주일",
         description: getMessage(),
-        imageUrl: "https://todocter.vercel.app/logo.png",
+                imageUrl: "https://todocter.vercel.app/logo.png?v=2",
         link: {
           mobileWebUrl: OPEN_CHAT_URL,
           webUrl: OPEN_CHAT_URL,
