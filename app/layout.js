@@ -2,6 +2,7 @@ import "./globals.css";
 import Script from "next/script";
 
 export const metadata = {
+  metadataBase: new URL("https://todocter.vercel.app"),
   title: "토닥터 - 가족과의 마음을 잇는 1주일",
   description: "매일 한 가지 질문으로 부모-자녀의 거리를 좁혀보세요. 1주일 완주 시 키링 선물을 드려요.",
   // 파비콘(작은 아이콘) 명시
