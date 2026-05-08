@@ -48,6 +48,19 @@ export default function WelcomePage() {
       return;
     }
 
+    // 'text' 타입으로 변경: 메시지 본문 + 단일 링크만 보냄 (버튼 제거)
+    window.Kakao.Share.sendDefault({
+      objectType: "text",
+      text: getMessage(),
+      link: {
+        mobileWebUrl: OPEN_CHAT_URL,
+        webUrl: OPEN_CHAT_URL,
+      },
+      buttonTitle: "오픈채팅 입장하기",
+    });
+  };
+    }
+
     window.Kakao.Share.sendDefault({
       objectType: "feed",
       content: {
