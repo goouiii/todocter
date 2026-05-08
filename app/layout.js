@@ -4,6 +4,23 @@ import Script from "next/script";
 export const metadata = {
   title: "토닥터 - 가족과의 마음을 잇는 1주일",
   description: "매일 한 가지 질문으로 부모-자녀의 거리를 좁혀보세요. 1주일 완주 시 키링 선물을 드려요.",
+  // 파비콘(작은 아이콘) 명시
+  icons: {
+    icon: "/logo-icon.png",
+  },
+  // 카카오톡 등이 미리보기 카드를 만들 때 사용하는 정보
+  openGraph: {
+    title: "토닥터 - 가족과의 마음을 잇는 1주일",
+    description: "매일 한 가지 질문으로 부모-자녀의 거리를 좁혀보세요.",
+    images: [
+      {
+        url: "https://todocter.vercel.app/logo-icon.png",
+        width: 800,
+        height: 800,
+        alt: "토닥터",
+      },
+    ],
+  },
 };
 
 const GA_ID = "G-9L7MSGGYDE";
