@@ -8,6 +8,8 @@ export default function WelcomePage() {
   const [role, setRole] = useState("");
   const [nickname, setNickname] = useState("");
   const [familyMembers, setFamilyMembers] = useState([]);
+  // 메시지 복사 완료 여부 (버튼 텍스트 바뀌도록)
+  const [copied, setCopied] = useState(false);
 
   useEffect(() => {
     setRole(sessionStorage.getItem("role") || "자녀");
@@ -16,6 +18,7 @@ export default function WelcomePage() {
     setFamilyMembers(members ? members.split(",") : []);
   }, []);
 
+  // ─── 부모/자녀에 따라 다른 메시지 ───
   const getMessage = () => {
     if (role === "부모") {
       return `우리 1주일 동안 매일 질문 하나씩 같이 답해보지 않을래?
@@ -36,22 +39,15 @@ export default function WelcomePage() {
     }
   };
 
-  const handleKakaoShare = () => {
-    if (typeof window === "undefined" || !window.Kakao) {
-      alert("카카오톡 공유 기능을 불러오는 중이에요. 잠시 후 다시 시도해주세요.");
-      return;
+  // ─── 메시지 복사 ───
+  const handleCopy = async () => {
+    try {
+      await navigator.clipboard.writeText(getMessage());
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch (err) {
+      alert("복사에 실패했어요. 메시지를 직접 선택해서 복사해주세요.");
     }
-
-    // text 타입으로 변경: 버튼 없이 메시지 본문에 URL 포함
-    window.Kakao.Share.sendDefault({
-      objectType: "text",
-      text: getMessage(),
-      link: {
-        mobileWebUrl: OPEN_CHAT_URL,
-        webUrl: OPEN_CHAT_URL,
-      },
-      buttonTitle: "오픈채팅 입장하기",
-    });
   };
 
   return (
@@ -145,32 +141,37 @@ export default function WelcomePage() {
           </p>
         </div>
 
-        {/* ─── STEP 3: 가족에게 공유 ─── */}
+        {/* ─── STEP 3: 가족에게 공유할 메시지 복사 ─── */}
         <div className="bg-white rounded-3xl p-7 border border-pink-100 mb-5">
           <div className="flex items-center gap-3 mb-4">
             <span className="bg-pink-500 text-white w-8 h-8 rounded-full flex items-center justify-center font-bold text-sm">
               3
             </span>
             <h2 className="text-lg font-bold text-gray-800">
-              {role === "부모" ? "자녀에게" : "부모님께"} 카카오톡으로 보내기
+              {role === "부모" ? "자녀에게" : "부모님께"} 메시지 보내기
             </h2>
           </div>
           <p className="text-gray-500 text-sm mb-5 leading-relaxed">
-            아래 버튼을 누르면 카카오톡 공유 창이 열려요.<br />
-            {role === "부모" ? "자녀를" : "부모님을"} 선택해서 메시지를 보내주세요.
+            아래 메시지를 복사해서 카카오톡으로 보내주세요. 둘 다 입장해야 서로의 답변을 받아볼 수 있어요.
           </p>
 
+          {/* 메시지 미리보기 */}
           <div className="bg-[#FFFBF5] border border-pink-100 rounded-2xl p-5 mb-4">
             <p className="text-gray-700 text-sm whitespace-pre-line leading-relaxed">
               {getMessage()}
             </p>
           </div>
 
+          {/* 복사 버튼 */}
           <button
-            onClick={handleKakaoShare}
-            className="w-full bg-yellow-400 text-gray-900 py-4 rounded-2xl font-bold text-base hover:bg-yellow-500 transition flex items-center justify-center gap-2"
+            onClick={handleCopy}
+            className={`w-full py-4 rounded-2xl font-bold text-base transition ${
+              copied
+                ? "bg-green-500 text-white"
+                : "bg-pink-500 text-white hover:bg-pink-600"
+            }`}
           >
-            💬 카카오톡으로 공유하기
+            {copied ? "✓ 복사 완료!" : "📋 메시지 복사하기"}
           </button>
         </div>
 
