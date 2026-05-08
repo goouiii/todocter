@@ -5,14 +5,10 @@ import { useState, useEffect } from "react";
 const OPEN_CHAT_URL = "https://open.kakao.com/o/gwu7ZKti";
 
 export default function WelcomePage() {
-  // 신청자 역할 (부모/자녀)
   const [role, setRole] = useState("");
-  // 신청자 닉네임 (가족 별명 매뉴얼에 사용)
   const [nickname, setNickname] = useState("");
-  // 함께 참여하는 가족 구성원 (예: ["엄마", "아빠"])
   const [familyMembers, setFamilyMembers] = useState([]);
 
-  // 페이지 진입 시 sessionStorage에서 정보 읽기
   useEffect(() => {
     setRole(sessionStorage.getItem("role") || "자녀");
     setNickname(sessionStorage.getItem("nickname") || "본인");
@@ -20,8 +16,7 @@ export default function WelcomePage() {
     setFamilyMembers(members ? members.split(",") : []);
   }, []);
 
-  // ─── 부모/자녀에 따라 다른 메시지 ───
-    const getMessage = () => {
+  const getMessage = () => {
     if (role === "부모") {
       return `우리 1주일 동안 매일 질문 하나씩 같이 답해보지 않을래?
 '토닥터'라는 서비스인데, 가족이 더 가까워질 수 있대.
@@ -41,14 +36,13 @@ export default function WelcomePage() {
     }
   };
 
-  // ─── 카카오톡 공유 ───
   const handleKakaoShare = () => {
     if (typeof window === "undefined" || !window.Kakao) {
       alert("카카오톡 공유 기능을 불러오는 중이에요. 잠시 후 다시 시도해주세요.");
       return;
     }
 
-    // 'text' 타입으로 변경: 메시지 본문 + 단일 링크만 보냄 (버튼 제거)
+    // text 타입으로 변경: 버튼 없이 메시지 본문에 URL 포함
     window.Kakao.Share.sendDefault({
       objectType: "text",
       text: getMessage(),
@@ -57,30 +51,6 @@ export default function WelcomePage() {
         webUrl: OPEN_CHAT_URL,
       },
       buttonTitle: "오픈채팅 입장하기",
-    });
-  };
-    }
-
-    window.Kakao.Share.sendDefault({
-      objectType: "feed",
-      content: {
-        title: "토닥터 - 가족과의 1주일",
-        description: getMessage(),
-               imageUrl: "https://todocter.vercel.app/logo-icon.png?v=3",
-        link: {
-          mobileWebUrl: OPEN_CHAT_URL,
-          webUrl: OPEN_CHAT_URL,
-        },
-      },
-      buttons: [
-        {
-          title: "오픈채팅 입장하기",
-          link: {
-            mobileWebUrl: OPEN_CHAT_URL,
-            webUrl: OPEN_CHAT_URL,
-          },
-        },
-      ],
     });
   };
 
@@ -132,7 +102,7 @@ export default function WelcomePage() {
           </a>
         </div>
 
-        {/* ─── STEP 2: 닉네임 설정 매뉴얼 (NEW) ─── */}
+        {/* ─── STEP 2: 닉네임 설정 매뉴얼 ─── */}
         <div className="bg-white rounded-3xl p-7 border border-pink-100 mb-5">
           <div className="flex items-center gap-3 mb-4">
             <span className="bg-pink-500 text-white w-8 h-8 rounded-full flex items-center justify-center font-bold text-sm">
@@ -147,13 +117,11 @@ export default function WelcomePage() {
             서로의 답변이 헷갈리지 않도록 도와줘요.
           </p>
 
-          {/* 본인 닉네임 표시 */}
           <div className="bg-pink-50 rounded-2xl p-5 mb-4">
             <p className="text-xs text-pink-500 font-semibold mb-1">내 닉네임</p>
             <p className="text-2xl font-bold text-gray-800">{nickname}</p>
           </div>
 
-          {/* 가족 구성원별 닉네임 예시 */}
           {familyMembers.length > 0 && (
             <div className="bg-[#FFFBF5] rounded-2xl p-5 mb-4 border border-pink-100">
               <p className="text-xs text-pink-500 font-semibold mb-3">함께하는 가족이 입장할 때</p>
@@ -172,7 +140,6 @@ export default function WelcomePage() {
             </div>
           )}
 
-          {/* 안내 문구 */}
           <p className="text-xs text-gray-400 leading-relaxed">
             💡 카카오톡 오픈채팅방 입장 시 닉네임 변경 화면이 나와요. 위 형식대로 입력하면 끝!
           </p>
@@ -193,7 +160,6 @@ export default function WelcomePage() {
             {role === "부모" ? "자녀를" : "부모님을"} 선택해서 메시지를 보내주세요.
           </p>
 
-          {/* 미리보기 메시지 */}
           <div className="bg-[#FFFBF5] border border-pink-100 rounded-2xl p-5 mb-4">
             <p className="text-gray-700 text-sm whitespace-pre-line leading-relaxed">
               {getMessage()}
@@ -217,7 +183,6 @@ export default function WelcomePage() {
           </p>
         </div>
 
-        {/* 홈으로 돌아가기 */}
         <div className="text-center mt-10">
           <a
             href="/"
