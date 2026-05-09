@@ -220,7 +220,7 @@ export default function Home() {
 
       {/* ─── 푸터 ─── */}
       <footer className="text-center py-10 text-gray-400 text-sm bg-[#FFFBF5] border-t border-pink-100">
-        © 2025 토닥터. 가족의 마음을 잇습니다.
+        © 2026 토닥터. 가족의 마음을 잇습니다.
       </footer>
 
     </main>
