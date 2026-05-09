@@ -8,7 +8,6 @@ export default function WelcomePage() {
   const [role, setRole] = useState("");
   const [nickname, setNickname] = useState("");
   const [familyMembers, setFamilyMembers] = useState([]);
-  // 메시지 복사 완료 여부 (버튼 텍스트 바뀌도록)
   const [copied, setCopied] = useState(false);
 
   useEffect(() => {
@@ -18,7 +17,6 @@ export default function WelcomePage() {
     setFamilyMembers(members ? members.split(",") : []);
   }, []);
 
-  // ─── 부모/자녀에 따라 다른 메시지 ───
   const getMessage = () => {
     if (role === "부모") {
       return `우리 1주일 동안 매일 질문 하나씩 같이 답해보지 않을래?
@@ -39,7 +37,6 @@ export default function WelcomePage() {
     }
   };
 
-  // ─── 메시지 복사 ───
   const handleCopy = async () => {
     try {
       await navigator.clipboard.writeText(getMessage());
@@ -64,7 +61,6 @@ export default function WelcomePage() {
       {/* ─── 메인 컨텐츠 ─── */}
       <section className="max-w-xl mx-auto px-6 py-12">
 
-        {/* 신청 완료 헤더 */}
         <div className="text-center mb-12">
           <div className="text-6xl mb-4">🎉</div>
           <h1 className="text-3xl md:text-4xl font-extrabold text-gray-800 mb-3">
@@ -155,14 +151,12 @@ export default function WelcomePage() {
             아래 메시지를 복사해서 카카오톡으로 보내주세요. 둘 다 입장해야 서로의 답변을 받아볼 수 있어요.
           </p>
 
-          {/* 메시지 미리보기 */}
           <div className="bg-[#FFFBF5] border border-pink-100 rounded-2xl p-5 mb-4">
             <p className="text-gray-700 text-sm whitespace-pre-line leading-relaxed">
               {getMessage()}
             </p>
           </div>
 
-          {/* 복사 버튼 */}
           <button
             onClick={handleCopy}
             className={`w-full py-4 rounded-2xl font-bold text-base transition ${
@@ -180,7 +174,7 @@ export default function WelcomePage() {
           <p className="text-pink-700 text-sm leading-relaxed">
             ✨ 모두 입장하시면<br />
             매일 정해진 시간에 질문이 도착해요.<br />
-            <strong>1주일 완주 시 키링이 발송됩니다!</strong>
+            <strong>1주일 동안 잘 참여하시면 커스텀 아크릴 키링을 구매하실 수 있어요!</strong>
           </p>
         </div>
 

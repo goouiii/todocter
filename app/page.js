@@ -3,18 +3,15 @@
 
 export default function Home() {
   return (
-    // 전체 페이지 배경: 아이보리 톤
     <main className="min-h-screen bg-[#FFFBF5]">
 
       {/* ─── 상단 네비게이션 바 ─── */}
       <nav className="flex justify-between items-center px-6 md:px-12 py-5 bg-[#FFFBF5]/90 backdrop-blur-sm sticky top-0 z-50 border-b border-pink-100">
-                {/* 로고 (아이콘 + 텍스트) */}
         <a href="/" className="flex items-center gap-2">
           <img src="/logo-icon.png" alt="토닥터 로고" className="h-10 w-10" />
           <span className="text-2xl font-bold text-pink-500">토닥터</span>
         </a>
 
-        {/* 신청하기 버튼 (상단 CTA) */}
         <a
           href="#apply"
           className="bg-pink-500 text-white px-5 py-2.5 rounded-full text-sm font-semibold hover:bg-pink-600 transition shadow-md"
@@ -23,27 +20,23 @@ export default function Home() {
         </a>
       </nav>
 
-      {/* ─── 히어로 섹션: 첫인상을 결정하는 핵심 영역 ─── */}
+      {/* ─── 히어로 섹션 ─── */}
       <section className="px-6 md:px-12 py-24 md:py-32 text-center max-w-4xl mx-auto">
 
-        {/* 작은 태그 */}
         <span className="inline-block bg-pink-100 text-pink-600 text-sm font-medium px-4 py-1.5 rounded-full mb-8">
           🌸 부모와 자녀를 위한 마음 잇기 서비스
         </span>
 
-        {/* 메인 제목 */}
         <h1 className="text-4xl md:text-6xl font-extrabold text-gray-800 leading-tight mb-6">
           매일 한 가지 질문으로,<br />
           <span className="text-pink-500">우리 가족이 더 가까워져요</span>
         </h1>
 
-        {/* 부제 */}
         <p className="text-lg md:text-xl text-gray-500 leading-relaxed mb-10">
           평소엔 꺼내기 어려운 이야기,<br />
           하루 한 번의 질문으로 자연스럽게 시작해보세요.
         </p>
 
-        {/* 메인 CTA 버튼 */}
         <a
           href="#apply"
           className="inline-block bg-pink-500 text-white px-10 py-4 rounded-full font-bold text-lg hover:bg-pink-600 transition shadow-lg"
@@ -51,9 +44,8 @@ export default function Home() {
           1주일 동안 함께해보기 →
         </a>
 
-        {/* 작은 안내 */}
         <p className="text-sm text-gray-400 mt-4">
-          ✨ 무료 / 1주일 회차제 / 완주 시 키링 선물
+          ✨ 무료 / 1주일 회차제 / 완주 시 커스텀 아크릴 키링 구매 가능
         </p>
       </section>
 
@@ -67,10 +59,8 @@ export default function Home() {
             복잡한 앱 설치 없이, 카카오톡 오픈채팅으로 바로 시작할 수 있어요.
           </p>
 
-          {/* 3단계 카드 */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
 
-            {/* 카드 1 */}
             <div className="bg-[#FFFBF5] rounded-3xl p-8 text-center border border-pink-100">
               <div className="text-5xl mb-4">💌</div>
               <h3 className="text-xl font-bold text-gray-800 mb-3">
@@ -82,7 +72,6 @@ export default function Home() {
               </p>
             </div>
 
-            {/* 카드 2 */}
             <div className="bg-[#FFFBF5] rounded-3xl p-8 text-center border border-pink-100">
               <div className="text-5xl mb-4">💬</div>
               <h3 className="text-xl font-bold text-gray-800 mb-3">
@@ -94,7 +83,6 @@ export default function Home() {
               </p>
             </div>
 
-            {/* 카드 3 */}
             <div className="bg-[#FFFBF5] rounded-3xl p-8 text-center border border-pink-100">
               <div className="text-5xl mb-4">🤍</div>
               <h3 className="text-xl font-bold text-gray-800 mb-3">
@@ -120,10 +108,8 @@ export default function Home() {
             부담 없이 시작하고, 함께 완주하면 작은 선물이 기다리고 있어요.
           </p>
 
-          {/* 단계별 진행 안내 */}
           <div className="space-y-6">
 
-            {/* 단계 1 */}
             <div className="flex items-start gap-5 bg-white rounded-2xl p-6 border border-pink-100">
               <div className="bg-pink-500 text-white w-10 h-10 rounded-full flex items-center justify-center font-bold flex-shrink-0">
                 1
@@ -136,7 +122,6 @@ export default function Home() {
               </div>
             </div>
 
-            {/* 단계 2 */}
             <div className="flex items-start gap-5 bg-white rounded-2xl p-6 border border-pink-100">
               <div className="bg-pink-500 text-white w-10 h-10 rounded-full flex items-center justify-center font-bold flex-shrink-0">
                 2
@@ -149,7 +134,6 @@ export default function Home() {
               </div>
             </div>
 
-            {/* 단계 3 */}
             <div className="flex items-start gap-5 bg-white rounded-2xl p-6 border border-pink-100">
               <div className="bg-pink-500 text-white w-10 h-10 rounded-full flex items-center justify-center font-bold flex-shrink-0">
                 3
@@ -162,7 +146,6 @@ export default function Home() {
               </div>
             </div>
 
-            {/* 단계 4 */}
             <div className="flex items-start gap-5 bg-white rounded-2xl p-6 border border-pink-100">
               <div className="bg-pink-500 text-white w-10 h-10 rounded-full flex items-center justify-center font-bold flex-shrink-0">
                 4
@@ -175,16 +158,31 @@ export default function Home() {
               </div>
             </div>
 
-            {/* 단계 5 - 보상 강조 */}
+            {/* 단계 5 - 보상 강조 (이미지 포함) */}
             <div className="flex items-start gap-5 bg-pink-50 rounded-2xl p-6 border-2 border-pink-300">
               <div className="bg-pink-500 text-white w-10 h-10 rounded-full flex items-center justify-center font-bold flex-shrink-0">
                 🎁
               </div>
-              <div>
-                <h3 className="font-bold text-pink-700 mb-1">1회차 완주 시 키링 선물</h3>
-                <p className="text-pink-600 text-sm">
-                  7일간 함께 완주하면, 토닥터가 정성스럽게 준비한 키링을 보내드려요.
-                </p>
+              <div className="flex-1">
+                <h3 className="font-bold text-pink-700 mb-3">
+                  1주일간 잘 참여하시면 커스텀 아크릴 키링 구매 가능!
+                </h3>
+                <div className="flex flex-col md:flex-row gap-4 items-start">
+                  <div className="flex-1">
+                    <p className="text-pink-600 text-sm leading-relaxed mb-2">
+                      1주일 동안 가장 인상 깊었던 질문과 답변으로 만든, 우리 가족만의 커스텀 아크릴 키링을 구매하실 수 있어요.
+                    </p>
+                    <p className="text-pink-500 text-xs italic">
+                      * 구매 방법은 별도 안내드립니다.
+                    </p>
+                  </div>
+                  {/* 키링 예시 이미지 */}
+                  <img
+                    src="/keyring-sample.jpg"
+                    alt="아크릴 키링 예시"
+                    className="w-32 h-32 object-cover rounded-xl border border-pink-200 flex-shrink-0"
+                  />
+                </div>
               </div>
             </div>
 
@@ -207,7 +205,6 @@ export default function Home() {
             평생의 추억으로 남을 수 있어요.
           </p>
 
-          {/* 하단 메인 CTA 버튼 */}
           <a
             href="/apply"
             className="inline-block bg-pink-500 text-white px-12 py-5 rounded-full font-bold text-lg hover:bg-pink-600 transition shadow-xl"
@@ -216,14 +213,14 @@ export default function Home() {
           </a>
 
           <p className="text-sm text-gray-500 mt-6">
-            🎁 1회차 완주하면 키링이 도착해요
+            🎁 잘 참여하면 커스텀 아크릴 키링 구매 자격을 얻을 수 있어요
           </p>
         </div>
       </section>
 
       {/* ─── 푸터 ─── */}
       <footer className="text-center py-10 text-gray-400 text-sm bg-[#FFFBF5] border-t border-pink-100">
-        © 2026 토닥터. 가족의 마음을 잇습니다.
+        © 2025 토닥터. 가족의 마음을 잇습니다.
       </footer>
 
     </main>
